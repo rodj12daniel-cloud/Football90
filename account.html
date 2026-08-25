@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Account | FOOTBALL 90</title>
+    <meta name="description" content="Football 90 account dashboard." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="topbar">
+        <div class="container">
+          <span>Free shipping over ₱3,500</span>
+          <span>World Cup 2026 Collection</span>
+        </div>
+      </div>
+      <div class="container nav-wrap">
+        <a href="index.html" class="logo" aria-label="Football 90 home">
+          <img class="logo-image" src="assets/images/logo/football90-logo.png" alt="" />
+          <span>FOOTBALL 90</span>
+        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="index.html">HOME</a>
+          <a href="shop.html">JERSEYS</a>
+          <a href="worldcup.html">WORLD CUP</a>
+          <a href="clubs.html">CLUBS</a>
+          <a href="national-teams.html">NATIONAL TEAMS</a>
+          <a href="shop.html?new=1">NEW ARRIVALS</a>
+        </nav>
+        <div class="nav-tools">
+          <button class="search-trigger" aria-label="Search">⌕</button>
+          <a href="account.html" class="icon-button" data-account-link aria-label="Account">👤</a>
+          <a href="wishlist.html" class="icon-button" aria-label="Wishlist">♡</a>
+          <a href="cart.html" class="icon-button nav-cart" aria-label="Cart">
+            🛒
+            <span class="cart-count">0</span>
+          </a>
+          <button class="mobile-toggle icon-button" aria-label="Open menu">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="search-overlay" aria-hidden="true">
+      <div class="search-panel" role="dialog" aria-modal="true">
+        <div class="search-panel-header">
+          <span>⌕</span>
+          <input id="searchInput" type="search" placeholder="Search jerseys, clubs, countries..." aria-label="Search jerseys" />
+        </div>
+        <div id="searchResults" class="search-results"></div>
+      </div>
+    </div>
+
+    <main class="section">
+      <div class="container account-wrap">
+        <div class="account-card">
+          <div class="section-header" style="margin-bottom: 0;">
+            <div>
+              <span class="eyebrow">Account</span>
+              <h2>YOUR DASHBOARD</h2>
+            </div>
+          </div>
+          <div class="account-dashboard">
+            <div class="dashboard-card"><h4>Profile</h4><p id="dashboardName">Guest</p></div>
+            <div class="dashboard-card"><h4>Orders</h4><p>2 orders</p></div>
+            <div class="dashboard-card"><h4>Wishlist</h4><p><a href="wishlist.html">View saved items</a></p></div>
+            <div class="dashboard-card"><h4>Addresses</h4><p>Home, Work</p></div>
+          </div>
+          <button id="logoutBtn" class="btn btn-secondary">LOGOUT</button>
+        </div>
+      </div>
+    </main>
+
+    <script src="js/products.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/auth.js"></script>
+  </body>
+</html>

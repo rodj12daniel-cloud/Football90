@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jerseys | FOOTBALL 90</title>
+    <meta name="description" content="Browse club, national team and World Cup jerseys from Football 90." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="topbar">
+        <div class="container">
+          <span>Free shipping over ₱3,500</span>
+          <span>World Cup 2026 Collection</span>
+        </div>
+      </div>
+      <div class="container nav-wrap">
+        <a href="index.html" class="logo" aria-label="Football 90 home">
+          <img class="logo-image" src="assets/images/logo/football90-logo.png" alt="" />
+          <span>FOOTBALL 90</span>
+        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="index.html">HOME</a>
+          <a href="shop.html" class="active">JERSEYS</a>
+          <a href="worldcup.html">WORLD CUP</a>
+          <a href="clubs.html">CLUBS</a>
+          <a href="national-teams.html">NATIONAL TEAMS</a>
+          <a href="shop.html?new=1">NEW ARRIVALS</a>
+        </nav>
+        <div class="nav-tools">
+          <button class="search-trigger" aria-label="Search">⌕</button>
+          <a href="account.html" class="icon-button" data-account-link aria-label="Account">👤</a>
+          <a href="wishlist.html" class="icon-button" aria-label="Wishlist">♡</a>
+          <a href="cart.html" class="icon-button nav-cart" aria-label="Cart">
+            🛒
+            <span class="cart-count">0</span>
+          </a>
+          <button class="mobile-toggle icon-button" aria-label="Open menu">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="search-overlay" aria-hidden="true">
+      <div class="search-panel" role="dialog" aria-modal="true">
+        <div class="search-panel-header">
+          <span>⌕</span>
+          <input id="searchInput" type="search" placeholder="Search jerseys, clubs, countries..." aria-label="Search jerseys" />
+        </div>
+        <div id="searchResults" class="search-results"></div>
+      </div>
+    </div>
+
+    <main>
+      <section class="page-hero page-hero-small shop-page-hero">
+        <div class="container page-hero-inner">
+          <div class="breadcrumbs">
+            <span>Home</span>
+            <span>/</span>
+            <span>Shop</span>
+          </div>
+          <h1>SHOP JERSEYS</h1>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container shop-layout">
+          <aside class="filters" aria-label="Product filters">
+            <div class="filter-group">
+              <h4>Category</h4>
+              <div class="check-list">
+                <label class="check-item"><input type="checkbox" name="category" value="Club" /> Club</label>
+                <label class="check-item"><input type="checkbox" name="category" value="National Team" /> National Team</label>
+                <label class="check-item"><input type="checkbox" name="category" value="World Cup" /> World Cup</label>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h4>League</h4>
+              <div class="check-list">
+                <label class="check-item"><input type="checkbox" name="league" value="Premier League" /> Premier League</label>
+                <label class="check-item"><input type="checkbox" name="league" value="La Liga" /> La Liga</label>
+                <label class="check-item"><input type="checkbox" name="league" value="Serie A" /> Serie A</label>
+                <label class="check-item"><input type="checkbox" name="league" value="Bundesliga" /> Bundesliga</label>
+                <label class="check-item"><input type="checkbox" name="league" value="Ligue 1" /> Ligue 1</label>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h4>Team</h4>
+              <div id="teamFilters" class="check-list"></div>
+            </div>
+
+            <div class="filter-group">
+              <h4>Kit type</h4>
+              <div class="check-list">
+                <label class="check-item"><input type="checkbox" name="kitType" value="Home" /> Home</label>
+                <label class="check-item"><input type="checkbox" name="kitType" value="Away" /> Away</label>
+                <label class="check-item"><input type="checkbox" name="kitType" value="Third" /> Third</label>
+                <label class="check-item"><input type="checkbox" name="kitType" value="Goalkeeper" /> Goalkeeper</label>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h4>Size</h4>
+              <div class="check-list">
+                <label class="check-item"><input type="checkbox" name="size" value="S" /> S</label>
+                <label class="check-item"><input type="checkbox" name="size" value="M" /> M</label>
+                <label class="check-item"><input type="checkbox" name="size" value="L" /> L</label>
+                <label class="check-item"><input type="checkbox" name="size" value="XL" /> XL</label>
+                <label class="check-item"><input type="checkbox" name="size" value="XXL" /> XXL</label>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h4>Price</h4>
+              <div class="range-box">
+                <div class="range-row"><span>₱0</span><span id="maxPriceDisplay">₱4,199</span></div>
+                <input id="priceRange" type="range" min="0" max="4200" step="100" value="4200" />
+              </div>
+            </div>
+          </aside>
+
+          <div>
+            <div class="shop-header">
+              <div class="results-count"><span id="resultsCount">0</span> products</div>
+              <div class="sort-bar">
+                <label class="select-wrap">
+                  <select id="sortSelect">
+                    <option value="featured">Featured</option>
+                    <option value="newest">Newest</option>
+                    <option value="popular">Most Popular</option>
+                    <option value="price-low">Price Low → High</option>
+                    <option value="price-high">Price High → Low</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+            <div class="product-grid compact" id="shopProducts"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="logo" style="color: white; margin-bottom: 18px;">
+              <img class="logo-image footer-logo-image" src="assets/images/logo/football90-logo.png" alt="" />
+              <span>FOOTBALL 90</span>
+            </div>
+            <p>WEAR THE GAME.</p>
+          </div>
+          <div>
+            <h4>Shop</h4>
+            <div class="footer-links">
+              <a href="shop.html">Jerseys</a>
+              <a href="worldcup.html">World Cup</a>
+              <a href="clubs.html">Clubs</a>
+              <a href="national-teams.html">National Teams</a>
+            </div>
+          </div>
+          <div>
+            <h4>Explore</h4>
+            <div class="footer-links">
+              <a href="shop.html?new=1">New Arrivals</a>
+              <a href="about.html">About</a>
+              <a href="#">Contact</a>
+              <a href="#">FAQ</a>
+            </div>
+          </div>
+          <div>
+            <h4>Newsletter</h4>
+            <p>GET THE LATEST KITS</p>
+            <form class="newsletter-form">
+              <input type="email" placeholder="Email address" aria-label="Email address" />
+              <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 Football 90</span>
+          <span>Shipping • Returns</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/products.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/shop.js"></script>
+  </body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>National Teams | FOOTBALL 90</title>
+    <meta name="description" content="National team jerseys and collections from Football 90." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="topbar">
+        <div class="container">
+          <span>Free shipping over ₱3,500</span>
+          <span>World Cup 2026 Collection</span>
+        </div>
+      </div>
+      <div class="container nav-wrap">
+        <a href="index.html" class="logo" aria-label="Football 90 home">
+          <img class="logo-image" src="assets/images/logo/football90-logo.png" alt="" />
+          <span>FOOTBALL 90</span>
+        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="index.html">HOME</a>
+          <a href="shop.html">JERSEYS</a>
+          <a href="worldcup.html">WORLD CUP</a>
+          <a href="clubs.html">CLUBS</a>
+          <a href="national-teams.html" class="active">NATIONAL TEAMS</a>
+          <a href="shop.html?new=1">NEW ARRIVALS</a>
+        </nav>
+        <div class="nav-tools">
+          <button class="search-trigger" aria-label="Search">⌕</button>
+          <a href="account.html" class="icon-button" data-account-link aria-label="Account">👤</a>
+          <a href="wishlist.html" class="icon-button" aria-label="Wishlist">♡</a>
+          <a href="cart.html" class="icon-button nav-cart" aria-label="Cart">
+            🛒
+            <span class="cart-count">0</span>
+          </a>
+          <button class="mobile-toggle icon-button" aria-label="Open menu">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="search-overlay" aria-hidden="true">
+      <div class="search-panel" role="dialog" aria-modal="true">
+        <div class="search-panel-header">
+          <span>⌕</span>
+          <input id="searchInput" type="search" placeholder="Search jerseys, clubs, countries..." aria-label="Search jerseys" />
+        </div>
+        <div id="searchResults" class="search-results"></div>
+      </div>
+    </div>
+
+    <main>
+      <section class="page-hero national-teams-page-hero page-hero-small">
+        <div class="container page-hero-inner">
+          <div class="breadcrumbs">
+            <span>Home</span>
+            <span>/</span>
+            <span>National Teams</span>
+          </div>
+          <h1>NATIONAL TEAMS</h1>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="worldcup-grid" id="national-team-grid"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="logo" style="color: white; margin-bottom: 18px;">
+              <img class="logo-image footer-logo-image" src="assets/images/logo/football90-logo.png" alt="" />
+              <span>FOOTBALL 90</span>
+            </div>
+            <p>WEAR THE GAME.</p>
+          </div>
+          <div>
+            <h4>Shop</h4>
+            <div class="footer-links">
+              <a href="shop.html">Jerseys</a>
+              <a href="worldcup.html">World Cup</a>
+              <a href="clubs.html">Clubs</a>
+              <a href="national-teams.html">National Teams</a>
+            </div>
+          </div>
+          <div>
+            <h4>Explore</h4>
+            <div class="footer-links">
+              <a href="shop.html?new=1">New Arrivals</a>
+              <a href="about.html">About</a>
+              <a href="#">Contact</a>
+              <a href="#">FAQ</a>
+            </div>
+          </div>
+          <div>
+            <h4>Newsletter</h4>
+            <p>GET THE LATEST KITS</p>
+            <form class="newsletter-form">
+              <input type="email" placeholder="Email address" aria-label="Email address" />
+              <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 Football 90</span>
+          <span>Shipping • Returns</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/products.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/nationalTeams.js"></script>
+  </body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | FOOTBALL 90</title>
+    <meta name="description" content="Login to Football 90." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="topbar">
+        <div class="container">
+          <span>Free shipping over ₱3,500</span>
+          <span>World Cup 2026 Collection</span>
+        </div>
+      </div>
+      <div class="container nav-wrap">
+        <a href="index.html" class="logo" aria-label="Football 90 home">
+          <img class="logo-image" src="assets/images/logo/football90-logo.png" alt="" />
+          <span>FOOTBALL 90</span>
+        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="index.html">HOME</a>
+          <a href="shop.html">JERSEYS</a>
+          <a href="worldcup.html">WORLD CUP</a>
+          <a href="clubs.html">CLUBS</a>
+          <a href="national-teams.html">NATIONAL TEAMS</a>
+          <a href="shop.html?new=1">NEW ARRIVALS</a>
+        </nav>
+        <div class="nav-tools">
+          <button class="search-trigger" aria-label="Search">⌕</button>
+          <a href="account.html" class="icon-button" data-account-link aria-label="Account">👤</a>
+          <a href="wishlist.html" class="icon-button" aria-label="Wishlist">♡</a>
+          <a href="cart.html" class="icon-button nav-cart" aria-label="Cart">
+            🛒
+            <span class="cart-count">0</span>
+          </a>
+          <button class="mobile-toggle icon-button" aria-label="Open menu">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="search-overlay" aria-hidden="true">
+      <div class="search-panel" role="dialog" aria-modal="true">
+        <div class="search-panel-header">
+          <span>⌕</span>
+          <input id="searchInput" type="search" placeholder="Search jerseys, clubs, countries..." aria-label="Search jerseys" />
+        </div>
+        <div id="searchResults" class="search-results"></div>
+      </div>
+    </div>
+
+    <main class="section">
+      <div class="container auth-wrap">
+        <div class="auth-card">
+          <div class="auth-tabs">
+            <button type="button" class="tab-btn active" data-auth-tab="login">Login</button>
+            <button type="button" class="tab-btn" data-auth-tab="register">Register</button>
+          </div>
+
+          <div class="auth-panel active" data-panel="login">
+            <form id="loginForm" class="auth-form">
+              <div class="field"><label>Email</label><input type="email" name="email" required /></div>
+              <div class="field"><label>Password</label><input type="password" name="password" required /></div>
+              <button type="submit" class="btn btn-primary">LOGIN</button>
+            </form>
+          </div>
+
+          <div class="auth-panel" data-panel="register">
+            <form id="registerForm" class="auth-form">
+              <div class="field"><label>Full Name</label><input type="text" name="name" required /></div>
+              <div class="field"><label>Email</label><input type="email" name="email" required /></div>
+              <div class="field"><label>Password</label><input type="password" name="password" required /></div>
+              <div class="field"><label>Confirm Password</label><input type="password" name="confirmPassword" required /></div>
+              <button type="submit" class="btn btn-primary">REGISTER</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="js/products.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/auth.js"></script>
+  </body>
+</html>

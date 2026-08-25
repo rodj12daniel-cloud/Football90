@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout | FOOTBALL 90</title>
+    <meta name="description" content="Football 90 checkout page for jerseys." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="topbar">
+        <div class="container">
+          <span>Free shipping over ₱3,500</span>
+          <span>World Cup 2026 Collection</span>
+        </div>
+      </div>
+      <div class="container nav-wrap">
+        <a href="index.html" class="logo" aria-label="Football 90 home">
+          <img class="logo-image" src="assets/images/logo/football90-logo.png" alt="" />
+          <span>FOOTBALL 90</span>
+        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="index.html">HOME</a>
+          <a href="shop.html">JERSEYS</a>
+          <a href="worldcup.html">WORLD CUP</a>
+          <a href="clubs.html">CLUBS</a>
+          <a href="national-teams.html">NATIONAL TEAMS</a>
+          <a href="shop.html?new=1">NEW ARRIVALS</a>
+        </nav>
+        <div class="nav-tools">
+          <button class="search-trigger" aria-label="Search">⌕</button>
+          <a href="account.html" class="icon-button" data-account-link aria-label="Account">👤</a>
+          <a href="wishlist.html" class="icon-button" aria-label="Wishlist">♡</a>
+          <a href="cart.html" class="icon-button nav-cart" aria-label="Cart">
+            🛒
+            <span class="cart-count">0</span>
+          </a>
+          <button class="mobile-toggle icon-button" aria-label="Open menu">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="search-overlay" aria-hidden="true">
+      <div class="search-panel" role="dialog" aria-modal="true">
+        <div class="search-panel-header">
+          <span>⌕</span>
+          <input id="searchInput" type="search" placeholder="Search jerseys, clubs, countries..." aria-label="Search jerseys" />
+        </div>
+        <div id="searchResults" class="search-results"></div>
+      </div>
+    </div>
+
+    <main class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <span class="eyebrow">Secure checkout</span>
+            <h2>CHECKOUT</h2>
+          </div>
+        </div>
+        <div class="checkout-wrap">
+          <div class="checkout-panel">
+            <form id="checkoutForm" class="checkout-form">
+              <div>
+                <h3>Customer Information</h3>
+                <div class="form-grid">
+                  <div class="field"><label>Full Name</label><input name="fullName" required /></div>
+                  <div class="field"><label>Email</label><input name="email" type="email" required /></div>
+                  <div class="field"><label>Phone Number</label><input name="phone" required /></div>
+                </div>
+              </div>
+
+              <div>
+                <h3>Shipping Address</h3>
+                <div class="form-grid">
+                  <div class="field" style="grid-column: 1 / -1;"><label>Address</label><input name="address" required /></div>
+                  <div class="field"><label>City</label><input name="city" required /></div>
+                  <div class="field"><label>Province</label><input name="province" required /></div>
+                  <div class="field"><label>Postal Code</label><input name="postalCode" required /></div>
+                </div>
+              </div>
+
+              <div>
+                <h3>Payment</h3>
+                <div class="payment-options">
+                  <label class="radio-box"><input type="radio" name="payment" value="GCash" checked /> GCash</label>
+                  <label class="radio-box"><input type="radio" name="payment" value="Cash on Delivery" /> Cash on Delivery</label>
+                  <label class="radio-box"><input type="radio" name="payment" value="Credit/Debit Card" /> Credit/Debit Card</label>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary">PLACE ORDER</button>
+            </form>
+          </div>
+          <aside class="summary-box">
+            <h3>Order Summary</h3>
+            <div id="checkoutItems"></div>
+            <div class="summary-row"><span>Subtotal</span><strong id="checkoutSubtotal">₱0</strong></div>
+            <div class="summary-row"><span>Shipping</span><strong id="checkoutShipping">₱0</strong></div>
+            <div class="summary-row total"><span>Total</span><strong id="checkoutTotal">₱0</strong></div>
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <script src="js/products.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/checkout.js"></script>
+  </body>
+</html>
