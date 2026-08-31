@@ -800,7 +800,7 @@ p { margin: 0 0 18px; color: var(--muted); }
 .club-card {
   position: relative;
   min-height: 180px;
-  background: #172a25;
+  background: #fdfdfd;
   color: white;
   display: flex;
   align-items: end;
