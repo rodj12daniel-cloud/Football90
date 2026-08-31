@@ -801,7 +801,7 @@ p { margin: 0 0 18px; color: var(--muted); }
   position: relative;
   min-height: 180px;
   background: #fdfdfd;
-  color: white;
+  color: rgb(27, 26, 26);
   display: flex;
   align-items: end;
   padding: 22px 18px;
