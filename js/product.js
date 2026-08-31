@@ -6,12 +6,14 @@
   const productId = Number(params.get('id') || 1);
   const product = getProductById(productId) || FOOTBALL90_PRODUCTS[0];
 
-  const thumbnails = [
-    product.image,
-    teamProductImage(product.team),
-    teamProductImage(`${product.team} Away`),
-    teamProductImage(product.league)
-  ];
+const thumbnails = product.images && product.images.length
+  ? product.images
+  : [
+      product.image,
+      teamProductImage(product.team),
+      teamProductImage(`${product.team} Away`),
+      teamProductImage(product.league)
+    ];
 
   detailContainer.innerHTML = `
     <div class="gallery-panel">
