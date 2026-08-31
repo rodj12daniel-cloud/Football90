@@ -326,7 +326,7 @@ p { margin: 0 0 18px; color: var(--muted); }
 .hero {
   position: relative;
   background: linear-gradient(90deg, rgba(11, 18, 15, 0.82), rgba(17, 24, 39, 0.42)),
-    url('../assets/images/hero/main.jpg') center/cover no-repeat;
+    url('../assets/images/hero/main1.jpg') center/cover no-repeat;
   color: white;
   min-height: 720px;
   display: flex;
