@@ -14,12 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <a href="${destination}">
           <img class="${nationalTeamLogo(country) ? 'national-team-image' : ''}" src="${nationalTeamLogo(country) || teamProductImage(country)}" alt="${country} logo" />
           <div class="country-body">
-            <div class="meta-row">
-              <span class="tag">${country}</span>
-              <span class="tag">Home</span>
-            </div>
             <h4>${country}</h4>
-            <span class="shop-link">Shop Now</span>
           </div>
         </a>
       </article>
