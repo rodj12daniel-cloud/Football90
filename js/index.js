@@ -31,13 +31,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!container) return;
     container.innerHTML = items.map((product) => `
       <article class="product-card">
-        <div class="product-media">
+        <a href="product.html?id=${product.id}" class="product-media" aria-label="View ${product.name}">
           <img src="${product.image}" alt="${product.name}" />
           <div class="product-badges">
             ${product.badge ? `<span class="badge ${product.badge.toLowerCase().replace(/\s+/g, '')}">${product.badge}</span>` : ''}
           </div>
-          <button class="quick-view" aria-label="Quick view" data-quick-view="${product.id}">⌕</button>
-        </div>
+        </a>
         <div class="product-body">
           <div class="product-meta">
             <span>${product.team}</span>
@@ -59,11 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setupGlobalWishlistButtons();
     setupGlobalCartButtons();
-    document.querySelectorAll('[data-quick-view]').forEach((button) => {
-      button.addEventListener('click', () => {
-        window.location.href = `product.html?id=${button.dataset.quickView}`;
-      });
-    });
   };
 
   renderProducts(featuredProducts, FOOTBALL90_PRODUCTS.slice(0, 8));

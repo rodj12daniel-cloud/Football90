@@ -136,13 +136,17 @@ const thumbnails = product.images && product.images.length
 
   const wishlistBtn = document.querySelector('[data-wishlist-id]');
   if (wishlistBtn) {
+    const syncStatus = () => {
+      const exists = getWishlist().includes(product.id);
+      wishlistBtn.classList.toggle('active', exists);
+      wishlistBtn.textContent = exists ? 'ADDED' : 'WISHLIST';
+    };
+
+    syncStatus();
     wishlistBtn.addEventListener('click', () => {
-      const current = getWishlist();
-      const exists = current.includes(product.id);
-      const next = exists ? current.filter((id) => id !== product.id) : [...current, product.id];
-      saveWishlist(next);
-      wishlistBtn.textContent = exists ? 'WISHLIST' : 'ADDED';
-      showToast(exists ? 'Removed from wishlist' : 'Added to wishlist');
+      const result = toggleWishlistItem(product.id);
+      syncStatus();
+      showToast(result.exists ? 'Removed from wishlist' : 'Added to wishlist');
     });
   }
 });

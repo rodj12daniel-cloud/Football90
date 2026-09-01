@@ -2,22 +2,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const featureGrid = document.getElementById('worldcup-featured');
   const countryGrid = document.getElementById('worldcup-countries');
   const collectionGrid = document.getElementById('worldcup-collection');
-  const allGrid = document.getElementById('worldcup-all');
 
-  const worldCupProducts = FOOTBALL90_PRODUCTS.filter((product) => product.category === 'World Cup');
   const countryList = ['Brazil', 'Argentina', 'France', 'Germany', 'Spain', 'Portugal', 'England', 'Netherlands', 'Japan', 'Mexico'];
+  const worldCupProducts = countryList.flatMap((country) => {
+    return FOOTBALL90_PRODUCTS.filter((product) => product.country === country && (product.category === 'World Cup' || product.category === 'International'));
+  });
 
   function renderCardGrid(container, items) {
     if (!container) return;
     container.innerHTML = items.map((product) => `
       <article class="product-card">
-        <div class="product-media">
+        <a href="product.html?id=${product.id}" class="product-media" aria-label="View ${product.name}">
           <img src="${product.image}" alt="${product.name}" />
           <div class="product-badges">
             ${product.badge ? `<span class="badge ${product.badge.toLowerCase().replace(/\s+/g, '')}">${product.badge}</span>` : ''}
           </div>
-          <button class="quick-view" aria-label="Quick view" data-quick-view="${product.id}">⌕</button>
-        </div>
+        </a>
         <div class="product-body">
           <div class="product-meta"><span>${product.team}</span><span>${product.kitType}</span></div>
           <h4>${product.name}</h4>
@@ -36,16 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setupGlobalWishlistButtons();
     setupGlobalCartButtons();
-    document.querySelectorAll('[data-quick-view]').forEach((button) => {
-      button.addEventListener('click', () => {
-        window.location.href = `product.html?id=${button.dataset.quickView}`;
-      });
-    });
   }
 
   if (featureGrid) renderCardGrid(featureGrid, worldCupProducts.slice(0, 4));
-  if (collectionGrid) renderCardGrid(collectionGrid, worldCupProducts.slice(0, 8));
-  if (allGrid) renderCardGrid(allGrid, worldCupProducts.slice(0, 12));
+  if (collectionGrid) renderCardGrid(collectionGrid, worldCupProducts);
 
   if (countryGrid) {
     countryGrid.innerHTML = countryList.map((country) => {

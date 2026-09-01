@@ -15,14 +15,17 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="wishlist-wrap">
         <div class="wishlist-items">
           ${items.map((product) => `
-            <div class="cart-item">
+            <div class="wishlist-item">
               <img src="${product.image}" alt="${product.name}" />
-              <div>
-                <h4>${product.name}</h4>
-                <div class="cart-meta">${product.team} • ${product.kitType}</div>
+              <div class="wishlist-copy">
+                <div class="wishlist-year">${product.season}</div>
+                <div class="wishlist-team">${product.team}</div>
+                <div class="wishlist-kit">${product.kitType}</div>
               </div>
-              <div class="price-block-inline" style="font-weight: 800;">${formatCurrency(product.price)}</div>
-              <button class="card-btn" data-add-to-cart="${product.id}" data-size="${product.sizes[0]}">Add to Cart</button>
+              <div class="wishlist-actions">
+                <div class="wishlist-price">${formatCurrency(product.price)}</div>
+                <button class="card-btn" data-add-to-cart="${product.id}" data-size="${product.sizes[0]}">Add to Cart</button>
+              </div>
               <button class="remove-link" data-remove-wishlist="${product.id}">Remove</button>
             </div>
           `).join('')}

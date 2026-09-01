@@ -21,13 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!shopProducts) return;
     shopProducts.innerHTML = products.map((product) => `
       <article class="product-card">
-        <div class="product-media">
+        <a href="product.html?id=${product.id}" class="product-media" aria-label="View ${product.name}">
           <img src="${product.image}" alt="${product.name}" />
           <div class="product-badges">
             ${product.badge ? `<span class="badge ${product.badge.toLowerCase().replace(/\s+/g, '')}">${product.badge}</span>` : ''}
           </div>
-          <button class="quick-view" aria-label="Quick view" data-quick-view="${product.id}">⌕</button>
-        </div>
+        </a>
         <div class="product-body">
           <div class="product-meta">
             <span>${product.team}</span>
@@ -50,13 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
     resultsCount.textContent = products.length;
     setupGlobalWishlistButtons();
     setupGlobalCartButtons();
-    const quickViewButtons = document.querySelectorAll('[data-quick-view]');
-    quickViewButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        const id = Number(button.dataset.quickView);
-        window.location.href = `product.html?id=${id}`;
-      });
-    });
   }
 
   function getSelectedValues(name) {

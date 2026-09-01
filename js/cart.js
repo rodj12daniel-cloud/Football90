@@ -18,19 +18,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const items = cart.map((item) => {
       const product = getProductById(item.id);
       if (!product) return '';
+      const sizeOptions = product.sizes.map((size) => `
+        <option value="${size}" ${size === item.size ? 'selected' : ''}>${size}</option>
+      `).join('');
+
       return `
         <div class="cart-item">
-          <img src="${product.image}" alt="${product.name}" />
+          <a href="product.html?id=${product.id}" class="cart-item-image" aria-label="View ${product.name}">
+            <img src="${product.image}" alt="${product.name}" />
+          </a>
           <div>
             <h4>${product.name}</h4>
-            <div class="cart-meta">${product.team} • ${item.size}</div>
+            <div class="cart-meta">${product.team}</div>
+            <label class="cart-size-picker">
+              <span>Size</span>
+              <select data-size-select data-id="${product.id}" data-old-size="${item.size}">
+                ${sizeOptions}
+              </select>
+            </label>
           </div>
           <div class="qty-control">
             <button type="button" data-action="decrease" data-id="${product.id}" data-size="${item.size}">−</button>
             <span>${item.quantity}</span>
             <button type="button" data-action="increase" data-id="${product.id}" data-size="${item.size}">+</button>
           </div>
-          <div class="price-block-inline" style="font-weight: 800;">${formatCurrency(product.price * item.quantity)}</div>
+          <div class="price-block-inline">${formatCurrency(product.price * item.quantity)}</div>
           <button class="remove-link" data-remove="${product.id}" data-size="${item.size}">Remove</button>
         </div>
       `;
@@ -60,6 +72,30 @@ document.addEventListener('DOMContentLoaded', () => {
           return entry;
         }).filter((entry) => entry.quantity > 0);
         saveCart(next);
+        renderCart();
+      });
+    });
+
+    document.querySelectorAll('[data-size-select]').forEach((select) => {
+      select.addEventListener('change', (event) => {
+        const productId = Number(event.target.dataset.id);
+        const oldSize = event.target.dataset.oldSize;
+        const newSize = event.target.value;
+        if (!newSize || newSize === oldSize) return;
+
+        const cartData = getCart();
+        const remaining = cartData.filter((entry) => !(entry.id === productId && entry.size === oldSize));
+        const existingSameSize = remaining.find((entry) => entry.id === productId && entry.size === newSize);
+        const targetEntry = cartData.find((entry) => entry.id === productId && entry.size === oldSize);
+        const quantity = targetEntry ? targetEntry.quantity : 1;
+
+        if (existingSameSize) {
+          existingSameSize.quantity += quantity;
+        } else {
+          remaining.push({ id: productId, size: newSize, quantity });
+        }
+
+        saveCart(remaining);
         renderCart();
       });
     });

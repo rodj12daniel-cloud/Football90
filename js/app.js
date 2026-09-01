@@ -73,6 +73,26 @@ function updateWishlistCount() {
   });
 }
 
+function toggleWishlistItem(productId) {
+  const wishlist = getWishlist();
+  const exists = wishlist.includes(productId);
+  const next = exists ? wishlist.filter((id) => id !== productId) : [...wishlist, productId];
+  saveWishlist(next);
+
+  document.querySelectorAll('[data-wishlist-id]').forEach((button) => {
+    const id = Number(button.dataset.wishlistId);
+    const active = getWishlist().includes(id);
+    button.classList.toggle('active', active);
+    if (button.dataset.wishlistId === String(productId)) {
+      if (button.textContent && button.textContent.trim().toLowerCase() === 'added') {
+        button.textContent = active ? 'ADDED' : 'WISHLIST';
+      }
+    }
+  });
+
+  return { exists, next };
+}
+
 function setActivePage() {
   const paths = window.location.pathname.split('/').filter(Boolean);
   const page = paths[paths.length - 1] || 'index.html';
@@ -165,19 +185,16 @@ function setupGlobalWishlistButtons() {
   wishlistButtons.forEach((button) => {
     const id = Number(button.dataset.wishlistId);
     const active = getWishlist().includes(id);
-    if (active) button.classList.add('active');
-    button.addEventListener('click', (event) => {
+    button.classList.toggle('active', active);
+    button.onclick = (event) => {
       event.preventDefault();
-      const wishlist = getWishlist();
-      const exists = wishlist.includes(id);
-      const next = exists ? wishlist.filter((item) => item !== id) : [...wishlist, id];
-      saveWishlist(next);
-      button.classList.toggle('active', !exists);
+      const result = toggleWishlistItem(id);
+      button.classList.toggle('active', !result.exists);
       if (window.location.pathname.endsWith('wishlist.html')) {
-        if (typeof renderWishlistPage === 'function') renderWishlistPage();
+        if (typeof renderWishlist === 'function') renderWishlist();
       }
-      showToast(exists ? 'Removed from wishlist' : 'Added to wishlist');
-    });
+      showToast(result.exists ? 'Removed from wishlist' : 'Added to wishlist');
+    };
   });
 }
 
@@ -234,5 +251,6 @@ window.getCart = getCart;
 window.saveCart = saveCart;
 window.getWishlist = getWishlist;
 window.saveWishlist = saveWishlist;
+window.toggleWishlistItem = toggleWishlistItem;
 window.getCurrentUser = getCurrentUser;
 window.saveCurrentUser = saveCurrentUser;

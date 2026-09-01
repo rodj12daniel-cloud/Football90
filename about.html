@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
@@ -33,10 +34,12 @@
         </nav>
         <div class="nav-tools">
           <button class="search-trigger" aria-label="Search">⌕</button>
-          <a href="account.html" class="icon-button" data-account-link aria-label="Account">👤</a>
+          <a href="account.html" class="icon-button" data-account-link aria-label="Account">
+            <img src="assets/images/icon-toolbar/account-logo.png" alt="Account" width="22" height="22" />
+          </a>
           <a href="wishlist.html" class="icon-button" aria-label="Wishlist">♡</a>
           <a href="cart.html" class="icon-button nav-cart" aria-label="Cart">
-            🛒
+            <img src="assets/images/icon-toolbar/cart-logo.png" alt="Cart" width="28" height="28" />
             <span class="cart-count">0</span>
           </a>
           <button class="mobile-toggle icon-button" aria-label="Open menu">☰</button>
@@ -55,33 +58,99 @@
     </div>
 
     <main>
-      <section class="page-hero page-hero-small">
+      <section class="page-hero page-hero-small about-page-hero">
         <div class="container page-hero-inner">
           <div class="breadcrumbs">
             <span>Home</span>
             <span>/</span>
             <span>About</span>
           </div>
-          <h1>FOOTBALL IS MORE THAN A GAME.</h1>
+          <div class="about-hero-content">
+            <span class="eyebrow eyebrow-light">Football 90</span>
+            <h1>About Football 90</h1>
+            <p class="about-hero-subtitle">Passion for Football. Made for Fans.</p>
+            <p class="about-hero-copy">Football 90 is a football jersey store built for fans who want to represent their favorite clubs and national teams with pride. From iconic kits to modern matchday essentials, we bring football culture to every supporter.</p>
+          </div>
         </div>
       </section>
 
-      <section class="section">
+      <section class="section about-story">
         <div class="container">
-          <div class="about-grid">
-            <div class="info-box">
-              <h4>Our Story</h4>
-              <p>Football 90 brings fans closer to the game through the jerseys they wear.</p>
+          <div class="section-heading small-heading">
+            <span class="eyebrow">Our Story</span>
+            <h2>Built from the love of the game.</h2>
+          </div>
+          <div class="story-layout">
+            <div class="story-copy">
+              <p>Football 90 was created from a simple love for the beautiful game. We wanted to build a place where football fans can discover jerseys representing the clubs, countries, and players they love.</p>
+              <p>From legendary national teams to the biggest clubs in the world, Football 90 brings the passion of football closer to every fan. Each collection is selected with the supporter in mind — celebrating club identity, national pride, and the moments that make football unforgettable.</p>
             </div>
-            <div class="info-box">
-              <h4>Our Products</h4>
-              <p>We curate premium jerseys for clubs, national teams, and World Cup moments.</p>
-            </div>
-            <div class="info-box">
-              <h4>Football Culture</h4>
-              <p>From local clubs to stadiums around the globe, football is a shared identity.</p>
+            <div class="story-highlight">
+              <span class="highlight-label">Football Culture</span>
+              <strong>Every jersey tells a story.</strong>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section class="section about-purpose">
+        <div class="container purpose-wrap">
+          <div class="section-heading small-heading">
+            <span class="eyebrow">Why Football 90?</span>
+            <h2>Made for football fans.</h2>
+          </div>
+          <div class="purpose-grid">
+            <div class="purpose-item">
+              <span>01</span>
+              <p>Built for football fans who want to represent their team with pride.</p>
+            </div>
+            <div class="purpose-item">
+              <span>02</span>
+              <p>Easy jersey browsing for clubs, national teams, and must-have kits.</p>
+            </div>
+            <div class="purpose-item">
+              <span>03</span>
+              <p>Modern and responsive shopping experience designed around football culture.</p>
+            </div>
+            <div class="purpose-item">
+              <span>04</span>
+              <p>Curated collections that celebrate the passion behind the game.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section about-maker">
+        <div class="container maker-wrap">
+          <div class="maker-card">
+            <div class="maker-avatar" aria-label="Profile placeholder for Rodj Rogacion">RR</div>
+            <div class="maker-copy">
+              <span class="eyebrow">Meet the Maker</span>
+              <h2>Rodj Rogacion</h2>
+              <h3>Founder &amp; Web Developer of Football 90</h3>
+              <p>Football 90 was designed and developed by Rodj Rogacion as a football-inspired e-commerce web project. Combining a passion for football with web development, the project was created to provide fans with a modern and enjoyable way to explore football jerseys.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section about-location">
+        <div class="container">
+          <div class="section-heading small-heading">
+            <span class="eyebrow">Visit Us</span>
+            <h2>Find Football 90 at our location.</h2>
+          </div>
+          <div class="location-card">
+            <div id="about-map" aria-label="Map showing the location of Football 90"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section about-cta">
+        <div class="container cta-box">
+          <span class="eyebrow">Ready to Represent Your Team?</span>
+          <h2>Explore our collection and find the jersey that represents your passion.</h2>
+          <a href="shop.html" class="btn btn-primary">Shop Jerseys</a>
         </div>
       </section>
     </main>
@@ -132,5 +201,25 @@
 
     <script src="js/products.js"></script>
     <script src="js/app.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const mapElement = document.getElementById('about-map');
+        if (!mapElement) return;
+
+        const map = L.map('about-map', {
+          zoomControl: true,
+          scrollWheelZoom: false
+        }).setView([14.13302604158372, 120.8761809446556], 15);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        L.marker([14.13302604158372, 120.8761809446556])
+          .addTo(map)
+          .bindPopup('<strong>Football 90</strong><br>Our Location');
+      });
+    </script>
   </body>
 </html>
