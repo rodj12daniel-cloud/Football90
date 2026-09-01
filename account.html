@@ -30,11 +30,15 @@
           <a href="clubs.html">CLUBS</a>
           <a href="national-teams.html">NATIONAL TEAMS</a>
           <a href="shop.html?new=1">NEW ARRIVALS</a>
+          <a href="account.html" class="mobile-nav-account">ACCOUNT</a>
         </nav>
         <div class="nav-tools">
           <button class="search-trigger" aria-label="Search">⌕</button>
-          <a href="account.html" class="icon-button" data-account-link aria-label="Account">
+          <a href="account.html" class="icon-button account-link" aria-label="Account">
             <img src="assets/images/icon-toolbar/account-logo.png" alt="Account" width="22" height="22" />
+          </a>
+          <a href="index.html" class="icon-button home-link-mobile" aria-label="Go home">
+            <img class="logo-image" src="assets/images/logo/football90-logo.png" alt="Football 90 home" width="22" height="22" />
           </a>
           <a href="wishlist.html" class="icon-button" aria-label="Wishlist">♡</a>
           <a href="cart.html" class="icon-button nav-cart" aria-label="Cart">
@@ -67,10 +71,45 @@
           </div>
           <div class="account-dashboard">
             <div class="dashboard-card"><h4>Profile</h4><p id="dashboardName">Guest</p></div>
-            <div class="dashboard-card"><h4>Orders</h4><p>2 orders</p></div>
+            <div class="dashboard-card"><h4>Orders</h4><p id="ordersCount">0 orders</p></div>
             <div class="dashboard-card"><h4>Wishlist</h4><p><a href="wishlist.html">View saved items</a></p></div>
-            <div class="dashboard-card"><h4>Addresses</h4><p>Home, Work</p></div>
+            <div class="dashboard-card"><h4>Addresses</h4><p id="addressSummary">No saved address</p></div>
           </div>
+
+          <form id="profileForm" class="checkout-form" style="margin-top: 12px;">
+            <div class="form-grid">
+              <div class="field">
+                <label for="profileName">Full Name</label>
+                <input id="profileName" name="name" type="text" placeholder="Your name" />
+              </div>
+              <div class="field">
+                <label for="profileEmail">Email</label>
+                <input id="profileEmail" name="email" type="email" placeholder="you@example.com" />
+              </div>
+              <div class="field">
+                <label for="profilePhone">Phone</label>
+                <input id="profilePhone" name="phone" type="tel" placeholder="09xx xxx xxxx" />
+              </div>
+              <div class="field">
+                <label for="profileCity">City</label>
+                <input id="profileCity" name="city" type="text" placeholder="City" />
+              </div>
+              <div class="field" style="grid-column: 1 / -1;">
+                <label for="profileAddress">Address</label>
+                <input id="profileAddress" name="address" type="text" placeholder="Street address" />
+              </div>
+              <div class="field">
+                <label for="profileProvince">Province</label>
+                <input id="profileProvince" name="province" type="text" placeholder="Province" />
+              </div>
+              <div class="field">
+                <label for="profilePostalCode">Postal Code</label>
+                <input id="profilePostalCode" name="postalCode" type="text" placeholder="Postal code" />
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">SAVE DETAILS</button>
+          </form>
+
           <button id="logoutBtn" class="btn btn-secondary">LOGOUT</button>
         </div>
       </div>

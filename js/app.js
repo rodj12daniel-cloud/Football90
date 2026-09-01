@@ -1,7 +1,9 @@
 const STORAGE_KEYS = {
   cart: 'football90_cart',
   wishlist: 'football90_wishlist',
-  auth: 'football90_auth'
+  auth: 'football90_auth',
+  profile: 'football90_profile',
+  orders: 'football90_orders'
 };
 
 const formatCurrency = (value) => `₱${Number(value).toLocaleString('en-PH')}`;
@@ -43,6 +45,36 @@ function getCurrentUser() {
 
 function saveCurrentUser(user) {
   writeStorage(STORAGE_KEYS.auth, user);
+}
+
+function getAccountProfile() {
+  const profile = readStorage(STORAGE_KEYS.profile, {});
+  const user = getCurrentUser();
+  if (!profile.name && user && user.name) {
+    profile.name = user.name;
+  }
+  if (!profile.email && user && user.email) {
+    profile.email = user.email;
+  }
+  return profile;
+}
+
+function saveAccountProfile(profile) {
+  writeStorage(STORAGE_KEYS.profile, profile || {});
+  const user = getCurrentUser();
+  if (user) {
+    user.name = profile?.name || user.name;
+    user.email = profile?.email || user.email;
+    saveCurrentUser(user);
+  }
+}
+
+function getOrders() {
+  return readStorage(STORAGE_KEYS.orders, []);
+}
+
+function saveOrders(orders) {
+  writeStorage(STORAGE_KEYS.orders, orders || []);
 }
 
 function showToast(message) {

@@ -16,6 +16,9 @@ const thumbnails = product.images && product.images.length
     ];
 
   detailContainer.innerHTML = `
+    <div class="detail-back-row">
+      <button type="button" class="detail-back-btn" id="backToShopBtn">← Back</button>
+    </div>
     <div class="gallery-panel">
       <div class="main-image">
         <img src="${product.image}" alt="${product.name}" id="mainProductImage" />
@@ -34,7 +37,6 @@ const thumbnails = product.images && product.images.length
       <div class="review-stars">★★★★★</div>
       <div class="price-block">
         <span class="price">${formatCurrency(product.price)}</span>
-        <span class="tag">${product.season}</span>
       </div>
       <p>${product.description}</p>
       <div class="meta-list">
@@ -91,6 +93,17 @@ const thumbnails = product.images && product.images.length
 
   let selectedSize = product.sizes[0];
   let quantity = 1;
+
+  const backBtn = document.getElementById('backToShopBtn');
+  if (backBtn) {
+    backBtn.addEventListener('click', () => {
+      if (document.referrer && document.referrer.includes('shop.html')) {
+        window.history.back();
+      } else {
+        window.location.href = 'shop.html';
+      }
+    });
+  }
 
   document.querySelectorAll('.option-chip[data-size]').forEach((button) => {
     button.addEventListener('click', () => {

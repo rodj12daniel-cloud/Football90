@@ -49,6 +49,55 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const profileForm = document.getElementById('profileForm');
+  if (profileForm) {
+    const profile = getAccountProfile();
+    const user = getCurrentUser();
+    const nameField = document.getElementById('profileName');
+    const emailField = document.getElementById('profileEmail');
+    const phoneField = document.getElementById('profilePhone');
+    const cityField = document.getElementById('profileCity');
+    const addressField = document.getElementById('profileAddress');
+    const provinceField = document.getElementById('profileProvince');
+    const postalCodeField = document.getElementById('profilePostalCode');
+
+    if (nameField) nameField.value = profile.name || user?.name || '';
+    if (emailField) emailField.value = profile.email || user?.email || '';
+    if (phoneField) phoneField.value = profile.phone || '';
+    if (cityField) cityField.value = profile.city || '';
+    if (addressField) addressField.value = profile.address || '';
+    if (provinceField) provinceField.value = profile.province || '';
+    if (postalCodeField) postalCodeField.value = profile.postalCode || '';
+
+    profileForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const data = Object.fromEntries(new FormData(profileForm).entries());
+      const cleaned = {
+        name: (data.name || '').trim(),
+        email: (data.email || '').trim(),
+        phone: (data.phone || '').trim(),
+        city: (data.city || '').trim(),
+        address: (data.address || '').trim(),
+        province: (data.province || '').trim(),
+        postalCode: (data.postalCode || '').trim()
+      };
+
+      if (!cleaned.name || !cleaned.email || !cleaned.address) {
+        showToast('Please fill in your name, email, and address.');
+        return;
+      }
+
+      saveAccountProfile(cleaned);
+      const dashboardName = document.getElementById('dashboardName');
+      if (dashboardName) dashboardName.textContent = cleaned.name;
+      const addressSummary = document.getElementById('addressSummary');
+      if (addressSummary) {
+        addressSummary.textContent = cleaned.address + (cleaned.city ? `, ${cleaned.city}` : '');
+      }
+      showToast('Your details were saved');
+    });
+  }
+
   const logoutBtn = document.getElementById('logoutBtn');
   if (logoutBtn) {
     logoutBtn.addEventListener('click', () => {
@@ -60,6 +109,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const dashboardName = document.getElementById('dashboardName');
   if (dashboardName) {
     const user = getCurrentUser();
-    dashboardName.textContent = user ? user.name : 'Guest';
+    const profile = getAccountProfile();
+    dashboardName.textContent = profile.name || user?.name || 'Guest';
+  }
+
+  const ordersCount = document.getElementById('ordersCount');
+  if (ordersCount) {
+    const count = getOrders().length;
+    ordersCount.textContent = count === 1 ? '1 order' : `${count} orders`;
+  }
+
+  const addressSummary = document.getElementById('addressSummary');
+  if (addressSummary) {
+    const profile = getAccountProfile();
+    const text = [profile.address, profile.city, profile.province].filter(Boolean).join(', ');
+    addressSummary.textContent = text || 'No saved address';
   }
 });

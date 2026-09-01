@@ -5,6 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const priceRange = document.getElementById('priceRange');
   const maxPriceDisplay = document.getElementById('maxPriceDisplay');
   const teamFilters = document.getElementById('teamFilters');
+  const mobileFilterToggle = document.getElementById('mobileFilterToggle');
+  const filters = document.querySelector('.filters');
+  const filterCloseBtn = document.querySelector('.filter-close-btn');
+  const mobileFilterBackdrop = document.getElementById('mobileFilterBackdrop');
+  const closeFilterButtons = document.querySelectorAll('.mobile-close-filters');
+  const applyFilterButtons = document.querySelectorAll('.mobile-apply-filters');
 
   const queryParams = new URLSearchParams(window.location.search);
   const selectedLeague = queryParams.get('league');
@@ -108,6 +114,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderProducts(sorted);
   }
+
+  function setMobileFiltersOpen(isOpen) {
+    if (!filters || !mobileFilterBackdrop) return;
+    filters.classList.toggle('open', isOpen);
+    mobileFilterBackdrop.classList.toggle('show', isOpen);
+    if (mobileFilterToggle) {
+      mobileFilterToggle.textContent = isOpen ? 'Hide Categories' : 'All Categories';
+      mobileFilterToggle.setAttribute('aria-expanded', String(isOpen));
+    }
+  }
+
+  if (mobileFilterToggle && filters) {
+    mobileFilterToggle.addEventListener('click', () => {
+      const isOpen = !filters.classList.contains('open');
+      setMobileFiltersOpen(isOpen);
+    });
+  }
+
+  if (filterCloseBtn) {
+    filterCloseBtn.addEventListener('click', () => setMobileFiltersOpen(false));
+  }
+
+  closeFilterButtons.forEach((button) => {
+    button.addEventListener('click', () => setMobileFiltersOpen(false));
+  });
+
+  if (mobileFilterBackdrop) {
+    mobileFilterBackdrop.addEventListener('click', () => setMobileFiltersOpen(false));
+  }
+
+  applyFilterButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      filterAndRender();
+      setMobileFiltersOpen(false);
+    });
+  });
 
   renderTeamFilters();
   maxPriceDisplay.textContent = formatCurrency(priceRange.value);

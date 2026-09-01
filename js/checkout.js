@@ -51,6 +51,15 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
+      const currentOrders = getOrders();
+      const newOrder = {
+        id: Date.now(),
+        name,
+        email,
+        total: Number((document.getElementById('checkoutTotal')?.textContent || '').replace(/[^\d.]/g, '')) || 0,
+        createdAt: new Date().toISOString()
+      };
+      saveOrders([...currentOrders, newOrder]);
       saveCart([]);
       form.innerHTML = `
         <div class="empty-box">
