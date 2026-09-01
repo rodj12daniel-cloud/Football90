@@ -31,6 +31,13 @@ const thumbnails = product.images && product.images.length
         `).join('')}
       </div>
     </div>
+    <div class="image-zoom-modal" id="imageZoomModal" aria-hidden="true">
+      <div class="image-zoom-backdrop" data-close-zoom="true"></div>
+      <div class="image-zoom-dialog" role="dialog" aria-modal="true" aria-label="Product image zoom">
+        <button type="button" class="image-zoom-close" id="closeZoomModal" aria-label="Close zoom">×</button>
+        <img src="${product.image}" alt="${product.name} zoom" id="zoomedProductImage" />
+      </div>
+    </div>
     <div class="detail-panel">
       <span class="eyebrow">${product.category}</span>
       <h1>${product.name}</h1>
@@ -115,12 +122,40 @@ const thumbnails = product.images && product.images.length
   });
 
   const mainImage = document.getElementById('mainProductImage');
+  const imageZoomModal = document.getElementById('imageZoomModal');
+  const zoomedProductImage = document.getElementById('zoomedProductImage');
+  const closeZoomModal = document.getElementById('closeZoomModal');
+
+  const openZoomModal = (imageUrl) => {
+    zoomedProductImage.src = imageUrl;
+    imageZoomModal.classList.add('show');
+    imageZoomModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+  };
+
+  const closeImageZoomModal = () => {
+    imageZoomModal.classList.remove('show');
+    imageZoomModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+  };
+
+  mainImage.addEventListener('click', () => openZoomModal(mainImage.src));
   document.querySelectorAll('.thumb-btn').forEach((button) => {
     button.addEventListener('click', () => {
       const image = button.dataset.image;
       mainImage.src = image;
       document.querySelectorAll('.thumb-btn').forEach((node) => node.classList.toggle('active', node === button));
     });
+  });
+  document.querySelectorAll('.thumb-btn').forEach((button) => {
+    button.addEventListener('dblclick', () => openZoomModal(button.dataset.image));
+  });
+  if (closeZoomModal) closeZoomModal.addEventListener('click', closeImageZoomModal);
+  document.querySelector('[data-close-zoom]')?.addEventListener('click', closeImageZoomModal);
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && imageZoomModal.classList.contains('show')) {
+      closeImageZoomModal();
+    }
   });
 
   document.getElementById('increaseQty').addEventListener('click', () => {
