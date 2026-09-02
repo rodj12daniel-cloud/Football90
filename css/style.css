@@ -1737,6 +1737,27 @@ body.modal-open {
   color: var(--muted);
 }
 
+.order-confirmation-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(15, 23, 42, 0.72);
+  z-index: 9999;
+}
+
+.order-confirmation-modal.show { display: flex; }
+.order-confirmation-backdrop { position: absolute; inset: 0; }
+.order-confirmation-dialog { position: relative; z-index: 1; width: min(100%, 430px); background: #fff; padding: 28px; text-align: center; box-shadow: 0 26px 60px rgba(0, 0, 0, 0.28); }
+.order-confirmation-dialog h2 { margin: 8px 0 18px; font-size: 1.65rem; }
+.order-confirmation-dialog img { display: block; width: min(100%, 220px); height: 220px; object-fit: cover; margin: 0 auto 16px; background: var(--card-alt); }
+.order-confirmation-dialog h3 { margin: 0 0 8px; font-size: 1rem; }
+.order-confirmation-dialog p { margin-bottom: 20px; }
+.order-confirmation-actions { display: flex; justify-content: center; gap: 10px; }
+.order-confirmation-actions .btn { min-height: 42px; }
+
 .account-orders {
   border-top: 1px solid var(--line);
   padding-top: 20px;

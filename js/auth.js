@@ -189,6 +189,37 @@ document.addEventListener('DOMContentLoaded', () => {
     `).join('') : '<div class="empty-box">No orders yet.</div>';
   }
 
+  const confirmationModal = document.getElementById('orderConfirmation');
+  const confirmationId = new URLSearchParams(window.location.search).get('order');
+  if (confirmationModal && confirmationId) {
+    const user = getCurrentUser();
+    const confirmationOrders = getOrders().filter((order) => !order.userId || !user?.id || String(order.userId) === String(user.id));
+    const order = confirmationOrders.find((entry) => String(entry.id) === String(confirmationId));
+    const item = order?.items?.[0];
+    const product = item ? getProductById(item.id) : null;
+    if (order && item && product) {
+      const image = document.getElementById('orderConfirmationImage');
+      const productName = document.getElementById('orderConfirmationProduct');
+      const productLink = document.getElementById('orderConfirmationProductLink');
+      image.src = product.image;
+      image.alt = item.name;
+      productName.textContent = item.name;
+      productLink.href = `product.html?id=${encodeURIComponent(item.id)}`;
+      confirmationModal.hidden = false;
+      confirmationModal.classList.add('show');
+      document.body.classList.add('modal-open');
+      confirmationModal.querySelector('.image-zoom-close').focus();
+      confirmationModal.querySelectorAll('[data-close-order-confirmation]').forEach((control) => {
+        control.addEventListener('click', () => {
+          confirmationModal.hidden = true;
+          confirmationModal.classList.remove('show');
+          document.body.classList.remove('modal-open');
+          window.history.replaceState({}, '', 'account.html');
+        });
+      });
+    }
+  }
+
   const addressSummary = document.getElementById('addressSummary');
   if (addressSummary) {
     const profile = getAccountProfile();

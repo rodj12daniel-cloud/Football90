@@ -131,6 +131,22 @@
       </div>
     </main>
 
+    <div id="orderConfirmation" class="order-confirmation-modal" role="dialog" aria-modal="true" aria-labelledby="orderConfirmationTitle" hidden>
+      <div class="order-confirmation-backdrop" data-close-order-confirmation></div>
+      <section class="order-confirmation-dialog">
+        <button type="button" class="image-zoom-close" data-close-order-confirmation aria-label="Close order confirmation">&times;</button>
+        <span class="eyebrow">Order received</span>
+        <h2 id="orderConfirmationTitle">THANKS FOR ORDERING</h2>
+        <img id="orderConfirmationImage" src="" alt="">
+        <h3 id="orderConfirmationProduct"></h3>
+        <p>Your order is being prepared. You can follow its status from your account.</p>
+        <div class="order-confirmation-actions">
+          <a id="orderConfirmationProductLink" href="" class="btn btn-secondary">VIEW ITEM</a>
+          <a href="account.html" class="btn btn-primary">VIEW ORDER</a>
+        </div>
+      </section>
+    </div>
+
     <script src="js/products.js"></script>
     <script src="js/app.js"></script>
     <script src="js/auth.js"></script>
