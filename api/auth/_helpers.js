@@ -42,6 +42,12 @@ function validateCredentials(name, email, password) {
   return null;
 }
 
+function setCustomerCookie(res, user) {
+  const payload = Buffer.from(JSON.stringify({ id: user.id, role: user.role, exp: Date.now() + 8 * 60 * 60 * 1000 })).toString('base64url');
+  const signature = crypto.createHmac('sha256', process.env.ADMIN_SESSION_SECRET || process.env.DB_PASSWORD || 'change-this-secret').update(payload).digest('base64url');
+  res.setHeader('Set-Cookie', `football90_user=${payload}.${signature}; HttpOnly; Path=/; SameSite=Lax; Max-Age=28800${process.env.NODE_ENV === 'production' ? '; Secure' : ''}`);
+}
+
 async function registerUser({ name, email, password }) {
   const passwordHash = await bcrypt.hash(password, 12);
   const [result] = await getPool().execute(
@@ -51,4 +57,4 @@ async function registerUser({ name, email, password }) {
   return { id: result.insertId, name, email, role: 'customer' };
 }
 
-module.exports = { getPool, registerUser, validateCredentials };
+module.exports = { getPool, registerUser, setCustomerCookie, validateCredentials };

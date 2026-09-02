@@ -5,6 +5,12 @@ const fs = require('fs');
 const express = require('express');
 const bcrypt = require('bcrypt');
 const mysql = require('mysql2/promise');
+const { setCustomerCookie } = require('./api/auth/_helpers');
+const ordersHandler = require('./api/orders');
+const adminLoginHandler = require('./api/admin/login');
+const adminUsersHandler = require('./api/admin/users');
+const adminOrdersHandler = require('./api/admin/orders');
+const adminStatsHandler = require('./api/admin/stats');
 
 const app = express();
 const port = Number(process.env.PORT) || 3000;
@@ -31,6 +37,7 @@ const pool = mysql.createPool({
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
+app.use((req, res, next) => { req.body = req.body || {}; next(); });
 
 function validateCredentials(name, email, password) {
   if (!name || name.length < 2 || name.length > 100) return 'Name must be between 2 and 100 characters.';
@@ -53,7 +60,9 @@ app.post('/api/auth/register', async (req, res) => {
       'INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)',
       [name, email, passwordHash, 'customer']
     );
-    return res.status(201).json({ user: { id: result.insertId, name, email, role: 'customer' } });
+    const user = { id: result.insertId, name, email, role: 'customer' };
+    setCustomerCookie(res, user);
+    return res.status(201).json({ user });
   } catch (error) {
     if (error.code === 'ER_DUP_ENTRY') return res.status(409).json({ message: 'An account with that email already exists.' });
     console.error('Registration error:', error);
@@ -73,12 +82,21 @@ app.post('/api/auth/login', async (req, res) => {
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).json({ message: 'Invalid email or password.' });
     }
-    return res.json({ user: { id: user.id, name: user.name, email: user.email, role: user.role } });
+    if (!user.is_active) return res.status(403).json({ message: 'This account is inactive.' });
+    const safeUser = { id: user.id, name: user.name, email: user.email, role: user.role };
+    setCustomerCookie(res, safeUser);
+    return res.json({ user: safeUser });
   } catch (error) {
     console.error('Login error:', error);
     return res.status(500).json({ message: 'Unable to log in right now.' });
   }
 });
+
+app.post('/api/orders', ordersHandler);
+app.all('/api/admin/login', adminLoginHandler);
+app.all('/api/admin/users', adminUsersHandler);
+app.all('/api/admin/orders', adminOrdersHandler);
+app.all('/api/admin/stats', adminStatsHandler);
 
 app.listen(port, () => {
   console.log(`Football 90 is running at http://localhost:${port}`);

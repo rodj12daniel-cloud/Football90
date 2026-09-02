@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const { getPool } = require('./_helpers');
+const { getPool, setCustomerCookie } = require('./_helpers');
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ message: 'Method not allowed.' });
@@ -17,7 +17,10 @@ module.exports = async function handler(req, res) {
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).json({ message: 'Invalid email or password.' });
     }
-    return res.json({ user: { id: user.id, name: user.name, email: user.email, role: user.role } });
+    if (!user.is_active) return res.status(403).json({ message: 'This account is inactive.' });
+    const safeUser = { id: user.id, name: user.name, email: user.email, role: user.role };
+    setCustomerCookie(res, safeUser);
+    return res.json({ user: safeUser });
   } catch (error) {
     console.error('Login error:', error);
     return res.status(500).json({ message: 'Unable to log in right now.' });

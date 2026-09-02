@@ -1,4 +1,4 @@
-const { registerUser, validateCredentials } = require('./_helpers');
+const { registerUser, setCustomerCookie, validateCredentials } = require('./_helpers');
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ message: 'Method not allowed.' });
@@ -12,6 +12,7 @@ module.exports = async function handler(req, res) {
 
   try {
     const user = await registerUser({ name, email, password });
+    setCustomerCookie(res, user);
     return res.status(201).json({ user });
   } catch (error) {
     if (error.code === 'ER_DUP_ENTRY') return res.status(409).json({ message: 'An account with that email already exists.' });

@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderOrderSummary();
 
   if (form) {
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
       const name = form.querySelector('[name="fullName"]').value.trim();
       const email = form.querySelector('[name="email"]').value.trim();
@@ -80,6 +80,24 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 0);
       const shipping = subtotal >= 3500 ? 0 : 250;
       const orderId = `F90-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).slice(2, 7).toUpperCase()}`;
+      const items = cart.map((item) => {
+        const product = getProductById(item.id);
+        return product ? { id: product.id, name: product.name, size: item.size, quantity: item.quantity, price: product.price } : null;
+      }).filter(Boolean);
+      const payment = form.querySelector('[name="payment"]:checked')?.value || '';
+      try {
+        const response = await fetch('/api/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({ userId: currentUser.id, name, email, phone, address, city, province, postalCode, payment, items, subtotal, shipping, total: subtotal + shipping })
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.message || 'Unable to save your order.');
+      } catch (error) {
+        showToast(error.message || 'Unable to save your order right now.');
+        return;
+      }
       const currentOrders = getOrders();
       const newOrder = {
         id: orderId,
@@ -91,11 +109,8 @@ document.addEventListener('DOMContentLoaded', () => {
         city,
         province,
         postalCode,
-        payment: form.querySelector('[name="payment"]:checked')?.value || '',
-        items: cart.map((item) => {
-          const product = getProductById(item.id);
-          return product ? { id: product.id, name: product.name, size: item.size, quantity: item.quantity, price: product.price } : null;
-        }).filter(Boolean),
+        payment,
+        items,
         subtotal,
         shipping,
         total: subtotal + shipping,

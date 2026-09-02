@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin | FOOTBALL 90</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="section admin-page">
+    <div class="container">
+      <section id="adminLogin" class="auth-card admin-login" aria-labelledby="adminLoginTitle">
+        <span class="eyebrow">Restricted access</span><h1 id="adminLoginTitle">ADMIN LOGIN</h1>
+        <form id="adminLoginForm" class="auth-form">
+          <div class="field"><label for="adminUsername">Username</label><input id="adminUsername" name="username" autocomplete="username" required></div>
+          <div class="field"><label for="adminPassword">Password</label><input id="adminPassword" name="password" type="password" autocomplete="current-password" required></div>
+          <button class="btn btn-primary" type="submit">LOGIN</button><p id="adminLoginMessage" role="alert"></p>
+        </form>
+      </section>
+      <section id="adminDashboard" hidden aria-labelledby="adminTitle">
+        <header class="admin-header"><div><span class="eyebrow">Football 90</span><h1 id="adminTitle">ADMIN DASHBOARD</h1></div><button id="adminLogout" class="btn btn-secondary">LOGOUT</button></header>
+        <div id="adminStats" class="admin-stats" aria-live="polite"></div>
+        <div class="admin-grid">
+          <section class="admin-panel"><div class="admin-panel-header"><h2>USERS</h2><label class="admin-search"><span class="sr-only">Search users</span><input id="userSearch" placeholder="Search users..." type="search"></label></div><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Status</th><th>Actions</th></tr></thead><tbody id="usersTable"></tbody></table></div></section>
+          <section class="admin-panel"><div class="admin-panel-header"><h2>ORDERS</h2></div><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Customer</th><th>Total</th><th>Status</th><th>Date</th></tr></thead><tbody id="ordersTable"></tbody></table></div></section>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="js/admin.js"></script>
+</body>
+</html>
