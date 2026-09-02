@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body>
+  <body class="about-page">
     <header class="site-header">
       <div class="topbar">
         <div class="container">
@@ -223,6 +223,19 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
+        const revealItems = document.querySelectorAll('.about-page main > section, .about-page .story-copy, .about-page .story-highlight, .about-page .about-social-banner, .about-page .about-video-card, .about-page .maker-card, .about-page .location-card, .about-page .cta-box');
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          });
+        }, { threshold: 0.12 });
+        revealItems.forEach((item) => {
+          item.classList.add('about-reveal');
+          revealObserver.observe(item);
+        });
+
         const mapElement = document.getElementById('about-map');
         if (!mapElement) return;
 
