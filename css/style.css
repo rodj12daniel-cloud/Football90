@@ -2166,7 +2166,7 @@ body.modal-open {
 .admin-page { min-height: 100vh; background: radial-gradient(circle at top right, rgba(212,168,77,0.14), transparent 34%), var(--bg); }
 .admin-page [hidden] { display: none !important; }
 .admin-brand { display: flex; align-items: center; gap: 12px; max-width: 1180px; margin: 0 auto 48px; color: var(--navy); }
-.admin-brand-mark { display: grid; place-items: center; width: 44px; height: 44px; background: var(--navy); color: #fff; font-weight: 900; letter-spacing: -0.08em; }
+.admin-brand-mark { display: block; width: 44px; height: 44px; object-fit: contain; }
 .admin-brand strong, .admin-brand span { display: block; }
 .admin-brand strong { font-size: 0.86rem; letter-spacing: 0.1em; }
 .admin-brand span:last-child { margin-top: 4px; color: var(--muted); font-size: 0.62rem; letter-spacing: 0.14em; }
