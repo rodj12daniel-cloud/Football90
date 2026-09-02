@@ -5,6 +5,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const shippingEl = document.getElementById('checkoutShipping');
   const totalEl = document.getElementById('checkoutTotal');
 
+  if (!getCurrentUser()) {
+    window.location.href = 'login.html?redirect=checkout.html';
+    return;
+  }
+
+  const currentUser = getCurrentUser();
+  const accountProfile = getAccountProfile();
+  const checkoutValues = {
+    fullName: accountProfile.name || currentUser.name,
+    email: accountProfile.email || currentUser.email,
+    phone: accountProfile.phone,
+    address: accountProfile.address,
+    city: accountProfile.city,
+    province: accountProfile.province,
+    postalCode: accountProfile.postalCode
+  };
+
+  Object.entries(checkoutValues).forEach(([fieldName, value]) => {
+    const field = form?.querySelector(`[name="${fieldName}"]`);
+    if (field && value) field.value = value;
+  });
+
   function renderOrderSummary() {
     const cart = getCart();
     if (!checkoutItems) return;
@@ -51,25 +73,38 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
+      const cart = getCart();
+      const subtotal = cart.reduce((sum, item) => {
+        const product = getProductById(item.id);
+        return sum + (product ? product.price * item.quantity : 0);
+      }, 0);
+      const shipping = subtotal >= 3500 ? 0 : 250;
+      const orderId = `F90-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).slice(2, 7).toUpperCase()}`;
       const currentOrders = getOrders();
       const newOrder = {
-        id: Date.now(),
+        id: orderId,
+        userId: currentUser.id,
         name,
         email,
-        total: Number((document.getElementById('checkoutTotal')?.textContent || '').replace(/[^\d.]/g, '')) || 0,
+        phone,
+        address,
+        city,
+        province,
+        postalCode,
+        payment: form.querySelector('[name="payment"]:checked')?.value || '',
+        items: cart.map((item) => {
+          const product = getProductById(item.id);
+          return product ? { id: product.id, name: product.name, size: item.size, quantity: item.quantity, price: product.price } : null;
+        }).filter(Boolean),
+        subtotal,
+        shipping,
+        total: subtotal + shipping,
+        status: 'Order is being prepared',
         createdAt: new Date().toISOString()
       };
       saveOrders([...currentOrders, newOrder]);
       saveCart([]);
-      form.innerHTML = `
-        <div class="empty-box">
-          <h3>ORDER CONFIRMED</h3>
-          <p>Thanks for being part of the game.</p>
-          <a href="index.html" class="btn btn-primary">CONTINUE SHOPPING</a>
-        </div>
-      `;
-      const summary = document.querySelector('.summary-box');
-      if (summary) summary.innerHTML = '<h3>Order Summary</h3><div class="empty-box">Your order has been placed.</div>';
+      window.location.href = `account.html?order=${encodeURIComponent(orderId)}`;
     });
   }
 });

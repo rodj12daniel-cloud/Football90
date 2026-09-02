@@ -3,6 +3,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const subtotalEl = document.getElementById('subtotal');
   const shippingEl = document.getElementById('shipping');
   const totalEl = document.getElementById('total');
+  const checkoutLink = document.querySelector('[data-checkout-link]');
+
+  if (checkoutLink) {
+    checkoutLink.addEventListener('click', (event) => {
+      if (!getCurrentUser()) {
+        event.preventDefault();
+        window.location.href = 'login.html?redirect=checkout.html';
+      }
+    });
+  }
 
   function renderCart() {
     const cart = getCart();

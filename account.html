@@ -69,14 +69,22 @@
               <h2>YOUR DASHBOARD</h2>
             </div>
           </div>
-          <div class="account-dashboard">
-            <div class="dashboard-card"><h4>Profile</h4><p id="dashboardName">Guest</p></div>
-            <div class="dashboard-card"><h4>Orders</h4><p id="ordersCount">0 orders</p></div>
-            <div class="dashboard-card"><h4>Wishlist</h4><p><a href="wishlist.html">View saved items</a></p></div>
-            <div class="dashboard-card"><h4>Addresses</h4><p id="addressSummary">No saved address</p></div>
+          <div id="guestAccountPrompt" class="empty-box">
+            <h3>WELCOME TO FOOTBALL 90</h3>
+            <p>Don't have an account yet? Register to continue.</p>
+            <a href="register.html" class="btn btn-primary">REGISTER</a>
+            <a href="login.html" class="btn btn-secondary">LOGIN</a>
           </div>
 
-          <form id="profileForm" class="checkout-form" style="margin-top: 12px;">
+          <div id="accountMemberContent" hidden>
+            <div class="account-dashboard">
+              <div class="dashboard-card"><h4>Profile</h4><p id="dashboardName">Guest</p></div>
+              <div class="dashboard-card"><h4>Orders</h4><p id="ordersCount">0 orders</p></div>
+              <div class="dashboard-card"><h4>Wishlist</h4><p><a href="wishlist.html">View saved items</a></p></div>
+              <div class="dashboard-card"><h4>Addresses</h4><p id="addressSummary">No saved address</p></div>
+            </div>
+
+            <form id="profileForm" class="checkout-form" style="margin-top: 12px;">
             <div class="form-grid">
               <div class="field">
                 <label for="profileName">Full Name</label>
@@ -108,10 +116,18 @@
               </div>
             </div>
             <button type="submit" class="btn btn-primary">SAVE DETAILS</button>
-          </form>
+            </form>
 
-          <button id="logoutBtn" class="btn btn-secondary">LOGOUT</button>
+            <button id="logoutBtn" class="btn btn-secondary">LOGOUT</button>
+          </div>
         </div>
+        <aside class="account-orders account-orders-panel" aria-labelledby="ordersHeading">
+          <div class="orders-heading">
+            <h2 id="ordersHeading">ORDER HISTORY</h2>
+            <span id="ordersStatusNote" class="eyebrow">Your latest orders</span>
+          </div>
+          <div id="orderHistory" class="order-history"></div>
+        </aside>
       </div>
     </main>
 

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoice | FOOTBALL 90</title>
+    <meta name="description" content="Printable Football 90 order invoice." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <main class="section invoice-page">
+      <div class="container">
+        <div id="invoiceNotFound" class="empty-box" hidden>
+          <h2>INVOICE NOT FOUND</h2>
+          <p>We could not find that order on this device.</p>
+          <a href="account.html" class="btn btn-primary">BACK TO ACCOUNT</a>
+        </div>
+
+        <article id="invoiceDocument" class="invoice-document" aria-labelledby="invoiceTitle" hidden>
+          <header class="invoice-header">
+            <div class="invoice-brand">
+              <img src="assets/images/logo/football90-logo.png" alt="Football 90 logo" />
+              <div>
+                <p class="eyebrow">Football 90</p>
+                <h1 id="invoiceTitle">INVOICE</h1>
+              </div>
+            </div>
+            <div class="invoice-meta">
+              <p><span>Order ID</span><strong id="invoiceOrderId"></strong></p>
+              <p><span>Date</span><strong id="invoiceDate"></strong></p>
+              <p><span>Status</span><strong id="invoiceStatus"></strong></p>
+            </div>
+          </header>
+
+          <div class="invoice-details">
+            <section aria-labelledby="billToHeading">
+              <h2 id="billToHeading">BILL TO</h2>
+              <p id="invoiceCustomer"></p>
+              <p id="invoiceContact"></p>
+              <p id="invoiceAddress"></p>
+            </section>
+            <section aria-labelledby="paymentHeading">
+              <h2 id="paymentHeading">PAYMENT</h2>
+              <p id="invoicePayment"></p>
+              <p>Thank you for shopping with Football 90.</p>
+            </section>
+          </div>
+
+          <div class="invoice-table-wrap">
+            <table class="invoice-table">
+              <caption>Items in order</caption>
+              <thead>
+                <tr><th scope="col">Item</th><th scope="col">Size</th><th scope="col">Qty</th><th scope="col">Price</th><th scope="col">Amount</th></tr>
+              </thead>
+              <tbody id="invoiceItems"></tbody>
+            </table>
+          </div>
+
+          <div class="invoice-total-wrap">
+            <dl class="invoice-totals">
+              <div><dt>Subtotal</dt><dd id="invoiceSubtotal"></dd></div>
+              <div><dt>Shipping</dt><dd id="invoiceShipping"></dd></div>
+              <div class="invoice-grand-total"><dt>Total</dt><dd id="invoiceTotal"></dd></div>
+            </dl>
+          </div>
+
+          <footer class="invoice-footer">
+            <p>This invoice is for your records.</p>
+            <div class="invoice-actions" aria-label="Invoice actions">
+              <button type="button" class="btn btn-primary" id="printInvoice">PRINT INVOICE</button>
+              <a href="account.html" class="btn btn-secondary">BACK TO ACCOUNT</a>
+            </div>
+          </footer>
+        </article>
+      </div>
+    </main>
+
+    <script src="js/app.js"></script>
+    <script src="js/invoice.js"></script>
+  </body>
+</html>
