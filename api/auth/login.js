@@ -10,14 +10,14 @@ module.exports = async function handler(req, res) {
 
   try {
     const [rows] = await getPool().execute(
-      'SELECT id, name, email, password, role FROM users WHERE email = ?',
+      'SELECT id, name, email, password, role, is_active FROM users WHERE email = ?',
       [email]
     );
     const user = rows[0];
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).json({ message: 'Invalid email or password.' });
     }
-    if (!user.is_active) return res.status(403).json({ message: 'This account is inactive.' });
+    if (user.is_active === 0 || user.is_active === false) return res.status(403).json({ message: 'This account is inactive.' });
     const safeUser = { id: user.id, name: user.name, email: user.email, role: user.role };
     setCustomerCookie(res, safeUser);
     return res.json({ user: safeUser });
