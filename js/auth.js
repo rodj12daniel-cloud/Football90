@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ name, email, password })
         });
-        const result = await response.json();
+        const result = await response.json().catch(() => ({}));
         if (!response.ok) throw new Error(result.message || 'Unable to create your account.');
         saveCurrentUser(result.user);
         showToast('Account created successfully.');
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, password })
         });
-        const result = await response.json();
+        const result = await response.json().catch(() => ({}));
         if (!response.ok) throw new Error(result.message || 'Unable to log in.');
         saveCurrentUser(result.user);
         showToast('Login successful.');
