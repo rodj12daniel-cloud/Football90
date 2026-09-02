@@ -15,6 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const guestAccountPrompt = document.getElementById('guestAccountPrompt');
   const accountMemberContent = document.getElementById('accountMemberContent');
 
+  if ((registerForm || loginForm) && getCurrentUser()) {
+    window.location.replace('account.html');
+    return;
+  }
+
   if (guestAccountPrompt && accountMemberContent) {
     const isLoggedIn = Boolean(getCurrentUser());
     guestAccountPrompt.hidden = isLoggedIn;

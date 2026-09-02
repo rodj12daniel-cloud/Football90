@@ -8,8 +8,9 @@
 <body>
   <main class="section admin-page">
     <div class="container">
+      <div class="admin-brand"><span class="admin-brand-mark">90</span><div><strong>FOOTBALL 90</strong><span>OPERATIONS CONSOLE</span></div></div>
       <section id="adminLogin" class="auth-card admin-login" aria-labelledby="adminLoginTitle">
-        <span class="eyebrow">Restricted access</span><h1 id="adminLoginTitle">ADMIN LOGIN</h1>
+        <span class="eyebrow">Restricted access</span><h1 id="adminLoginTitle">ADMIN LOGIN</h1><p class="admin-intro">Manage customers and orders from one secure workspace.</p>
         <form id="adminLoginForm" class="auth-form">
           <div class="field"><label for="adminUsername">Username</label><input id="adminUsername" name="username" autocomplete="username" required></div>
           <div class="field"><label for="adminPassword">Password</label><input id="adminPassword" name="password" type="password" autocomplete="current-password" required></div>
@@ -17,7 +18,7 @@
         </form>
       </section>
       <section id="adminDashboard" hidden aria-labelledby="adminTitle">
-        <header class="admin-header"><div><span class="eyebrow">Football 90</span><h1 id="adminTitle">ADMIN DASHBOARD</h1></div><button id="adminLogout" class="btn btn-secondary">LOGOUT</button></header>
+        <header class="admin-header"><div><span class="eyebrow">Football 90 / Operations</span><h1 id="adminTitle">ADMIN DASHBOARD</h1><p class="admin-intro">A clear view of customers, orders, and today’s store activity.</p></div><button id="adminLogout" class="btn btn-secondary">LOGOUT</button></header>
         <div id="adminStats" class="admin-stats" aria-live="polite"></div>
         <div class="admin-grid">
           <section class="admin-panel"><div class="admin-panel-header"><h2>USERS</h2><label class="admin-search"><span class="sr-only">Search users</span><input id="userSearch" placeholder="Search users..." type="search"></label></div><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Status</th><th>Actions</th></tr></thead><tbody id="usersTable"></tbody></table></div></section>
